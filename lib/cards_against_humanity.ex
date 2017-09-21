@@ -1,18 +1,10 @@
 defmodule CardsAgainstHumanity do
-  @moduledoc """
-  Documentation for CardsAgainstHumanity.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> CardsAgainstHumanity.hello
-      :world
-
-  """
   def hello do
     :world
   end
+
+  #TODO 
+  # 1. download https://www.crhallberg.com/cah/json/output.php
+  # 2. data is decks[] (Base)
+  # 3. type is JSON
 end
