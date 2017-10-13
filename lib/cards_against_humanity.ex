@@ -1,10 +1,8 @@
 defmodule CardsAgainstHumanity do
-  def hello do
-    :world
-  end
+  use Application
 
-  #TODO 
-  # 1. download https://www.crhallberg.com/cah/json/output.php
-  # 2. data is decks[] (Base)
-  # 3. type is JSON
+
+  def start(_type, _args) do
+    CardsAgainstHumanity.Cards.Supervisor.start_link(name: Cards.Supervisor)
+  end
 end
