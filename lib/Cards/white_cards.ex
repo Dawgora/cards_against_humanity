@@ -9,19 +9,35 @@ defmodule CardsAgainstHumanity.Cards.WhiteCards do
         GenServer.call(pid, {:show})
     end
 
+    def pick(pid) do
+        GenServer.call(pid, {:pick})
+    end
+
     ### SERVER SIDE
 
     def init(_) do
         white = 
-        ["CAHe1", "CAHe2"]
+        ["CAHe1", "CAHe2", "CAHe3", "CAHe4", "CAHe5", "CAHe6"]
         |> (&Enum.flat_map(&1, fn(x) -> readFiles(x, "/white.txt") end)).()
 
         {:ok, white}
     end
 
     def handle_call({:show}, _from, state) do
-        state
-        |> Enum.each ( fn x -> IO.puts x end)
+        Enum.each(state, fn(x) -> IO.puts x end)
+        
+        {:reply, :ok, state}
+    end
+
+    def handle_call({:pick}, _from, []) do
+        IO.puts "No cards"
+        {:reply, :ok, []}
+    end
+
+    def handle_call({:pick}, _from, state) do
+        picked = Enum.random(state)
+        state = Enum.filter(state, fn(x) -> x != picked end)
+        IO.puts picked
         
         {:reply, :ok, state}
     end
